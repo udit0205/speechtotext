@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech</title>
+</head>
+<body>
+    <h1>Text to Speech Converter</h1>
+    <textarea id="textInput" rows="5" cols="50" placeholder="Enter text here..."></textarea>
+    <br>
+    <label for="languageSelect">Choose Language:</label>
+    <select id="languageSelect">
+        <option value="en-US">English</option>
+        <option value="hi-IN">Hindi</option>
+    </select>
+    <br><br>
+    <button onclick="convertTextToSpeech()">Convert to Speech</button>
+
+    <script>
+        function convertTextToSpeech() {
+            const text = document.getElementById('textInput').value;
+            const language = document.getElementById('languageSelect').value;
+
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = language;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Sorry, your browser does not support text-to-speech.');
+            }
+        }
+    </script>
+</body>
+</html>
